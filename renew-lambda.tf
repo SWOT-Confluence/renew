@@ -65,7 +65,7 @@ resource "aws_scheduler_schedule" "aws_schedule_renew_aqua" {
   flexible_time_window {
     mode = "OFF"
   }
-  schedule_expression = "cron(0/50 * * * ? *)"
+  schedule_expression = "rate(50 minutes)"
   target {
     arn      = aws_lambda_function.aws_lambda_renew.arn
     role_arn = aws_iam_role.aws_eventbridge_renew_execution_role.arn
