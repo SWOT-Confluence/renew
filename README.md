@@ -24,3 +24,11 @@ To deploy:
 3. Initialize terraform: `terraform init`
 4. Plan terraform modifications: `terraform plan -out=tfplan`
 5. Apply terraform modifications: `terraform apply tfplan`
+
+# disable renew
+
+Disables renew Lambda function so that it no longer runs every 50 minutes to
+retrieves and stores temporary S3 credentials.
+
+This is a docker container meant to be run as an AWS Batch job after the input
+module.
