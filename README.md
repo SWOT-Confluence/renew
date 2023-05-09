@@ -24,7 +24,3 @@ To deploy:
 3. Initialize terraform: `terraform init`
 4. Plan terraform modifications: `terraform plan -out=tfplan`
 5. Apply terraform modifications: `terraform apply tfplan`
-
-# todo
-
-- Remove hardcoded use of SSM key from renew.get_s3_creds so that repo can be made public.

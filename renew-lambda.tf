@@ -59,7 +59,7 @@ resource "aws_iam_policy" "aws_lambda_renew_execution_policy" {
 }
 
 # EventBridge schedule
-resource "aws_scheduler_schedule" "aws_schedule_renew_aqua" {
+resource "aws_scheduler_schedule" "aws_schedule_renew" {
   name       = "${var.prefix}-renew"
   group_name = "default"
   flexible_time_window {
@@ -69,6 +69,9 @@ resource "aws_scheduler_schedule" "aws_schedule_renew_aqua" {
   target {
     arn      = aws_lambda_function.aws_lambda_renew.arn
     role_arn = aws_iam_role.aws_eventbridge_renew_execution_role.arn
+    input = jsonencode({
+      ssm_key = "${var.ssm_key}"
+    })
   }
   state = "DISABLED"
 }

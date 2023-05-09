@@ -29,3 +29,8 @@ variable "profile" {
   type        = string
   description = "Named profile to build infrastructure with"
 }
+
+variable "ssm_key" {
+  type        = string
+  description = "Key Management Service (KMS) ID used to encrypt a parameter"
+}

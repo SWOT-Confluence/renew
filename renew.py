@@ -20,9 +20,11 @@ S3_ENDPOINT = "https://archive.podaac.earthdata.nasa.gov/s3credentials"
 def handler(event, context):
     """Handles error events delivered from EventBridge."""
     
+    ssm_key = event["ssm_key"]
+    
     username, password = get_edl()
     try:
-        get_s3_creds(username, password)
+        get_s3_creds(username, password, ssm_key)
     except botocore.exceptions.ClientError as e:
         print("Error encountered.")
         print(e)
@@ -42,7 +44,7 @@ def get_edl():
     else:
         return username, password    
         
-def get_s3_creds(edl_username, edl_password):
+def get_s3_creds(edl_username, edl_password, key_id):
     """Retreive S3 credentials from endpoint, write to SSM parameter store
     and return them."""
     
@@ -55,7 +57,7 @@ def get_s3_creds(edl_username, edl_password):
             Description="Temporary SWOT S3 bucket key",
             Value=s3_creds["accessKeyId"],
             Type="SecureString",
-            KeyId="1416df6c-7a20-46a1-949d-d26975acfdd0",
+            KeyId=key_id,
             Overwrite=True,
             Tier="Standard"
         )
@@ -64,7 +66,7 @@ def get_s3_creds(edl_username, edl_password):
             Description="Temporary SWOT S3 bucket secret",
             Value=s3_creds["secretAccessKey"],
             Type="SecureString",
-            KeyId="1416df6c-7a20-46a1-949d-d26975acfdd0",
+            KeyId=key_id,
             Overwrite=True,
             Tier="Standard"
         )
@@ -73,7 +75,7 @@ def get_s3_creds(edl_username, edl_password):
             Description="Temporary SWOT S3 bucket token",
             Value=s3_creds["sessionToken"],
             Type="SecureString",
-            KeyId="1416df6c-7a20-46a1-949d-d26975acfdd0",
+            KeyId=key_id,
             Overwrite=True,
             Tier="Standard"
         )
@@ -82,7 +84,7 @@ def get_s3_creds(edl_username, edl_password):
             Description="Temporary SWOT S3 bucket expiration",
             Value=s3_creds["expiration"],
             Type="SecureString",
-            KeyId="1416df6c-7a20-46a1-949d-d26975acfdd0",
+            KeyId=key_id,
             Overwrite=True,
             Tier="Standard"
         )

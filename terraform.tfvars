@@ -1,3 +1,4 @@
-app_version = 0.1
-prefix      = "confluence"
-profile     = "default"
+app_version = 0
+prefix      = ""
+profile     = ""
+ssm_key     = ""
