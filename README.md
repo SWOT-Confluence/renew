@@ -47,5 +47,5 @@ export aws_key=XXXXXXXXXXXXXX
 export aws_secret=XXXXXXXXXXXXXXXXXXXXXXXXXX
 
 # Docker run command
-docker run --rm --name disable_renew -e AWS_ACCESS_KEY_ID=$aws_key -e AWS_SECRET_ACCESS_KEY=$aws_secret -e AWS_DEFAULT_REGION=us-west-2 diable_renew:latest
+docker run --rm --name disable_renew -e AWS_ACCESS_KEY_ID=$aws_key -e AWS_SECRET_ACCESS_KEY=$aws_secret -e AWS_DEFAULT_REGION=us-west-2 disable_renew:latest
 ```
