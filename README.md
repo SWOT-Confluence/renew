@@ -32,3 +32,20 @@ retrieves and stores temporary S3 credentials.
 
 This is a docker container meant to be run as an AWS Batch job after the input
 module.
+
+## installation
+
+Build a Docker image: `docker build -t disable_renew .`
+
+## execution
+
+AWS credentials will need to be passed as environment variables to the container so that `renew` may access AWS infrastructure to generate JSON files.
+
+```
+# Credentials
+export aws_key=XXXXXXXXXXXXXX
+export aws_secret=XXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# Docker run command
+docker run --rm --name disable_renew -e AWS_ACCESS_KEY_ID=$aws_key -e AWS_SECRET_ACCESS_KEY=$aws_secret -e AWS_DEFAULT_REGION=us-west-2 disable_renew:latest
+```
