@@ -39,7 +39,7 @@ Build a Docker image: `docker build -t disable_renew .`
 
 ## execution
 
-AWS credentials will need to be passed as environment variables to the container so that `datagen` may access AWS infrastructure to generate JSON files.
+AWS credentials will need to be passed as environment variables to the container so that `renew` may access AWS infrastructure to generate JSON files.
 
 ```
 # Credentials
