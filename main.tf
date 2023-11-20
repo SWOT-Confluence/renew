@@ -1,4 +1,7 @@
 terraform {
+  backend "s3" {
+    encrypt = true
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -20,7 +23,11 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 data "aws_iam_policy" "get_put_parameter" {
-  name = "amazon-ssm-get-put-parameter"
+  name = "${var.prefix}-batch-job-ssm-policy"
+}
+
+data "aws_kms_alias" "ssm_key" {
+  name = "alias/${var.prefix}-ssm-parameter-store"
 }
 
 # Local variables
