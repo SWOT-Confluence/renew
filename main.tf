@@ -26,8 +26,12 @@ data "aws_iam_policy" "get_put_parameter" {
   name = "${var.prefix}-batch-job-ssm-policy"
 }
 
-data "aws_kms_alias" "ssm_key" {
+data "aws_kms_alias" "ssm_alias" {
   name = "alias/${var.prefix}-ssm-parameter-store"
+}
+
+data "aws_kms_key" "ssm_key" {
+  key_id = "alias/${var.prefix}-ssm-parameter-store"
 }
 
 # Local variables
